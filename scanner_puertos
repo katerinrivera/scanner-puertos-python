@@ -1,0 +1,63 @@
+import socket
+
+def escanear_puertos():
+    print("=" * 40)
+    print("        ESCÁNER DE PUERTOS")
+    print("=" * 40)
+
+    # Datos del objetivo
+    ip_objetivo = input("Ingrese la IP del objetivo: ")
+    puerto_inicio = int(input("Ingrese el puerto inicial: "))
+    puerto_fin = int(input("Ingrese el puerto final: "))
+
+    # Información del escaneo
+    print(f"\nIP: {ip_objetivo}")
+    print(f"Desde: {puerto_inicio}")
+    print(f"Hasta: {puerto_fin}")
+    print("Escaneando...\n")
+
+    puertos_analizados = 0
+    puertos_abiertos = 0
+    lista_abiertos = []
+
+    try:
+        for puerto in range(puerto_inicio, puerto_fin + 1):
+            puertos_analizados += 1
+
+            with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+                s.settimeout(0.4)
+                resultado = s.connect_ex((ip_objetivo, puerto))
+
+                if resultado == 0:
+                    print(f"Puerto {puerto} - ABIERTO")
+                    puertos_abiertos += 1
+                    lista_abiertos.append(puerto)
+
+    except KeyboardInterrupt:
+        print("\n[!] Escaneo interrumpido por el usuario.")
+    except ValueError:
+        print("\n[!] Error: ingrese números válidos para los puertos.")
+        return
+    except socket.gaierror:
+        print("\n[!] Error: no se pudo resolver la dirección IP.")
+        return
+    except Exception as e:
+        print(f"\n[!] Se produjo un error: {e}")
+        return
+
+    # Resumen
+    print("\n" + "=" * 40)
+    print("RESUMEN DEL ESCANEO")
+    print("=" * 40)
+    print(f"Puertos analizados: {puertos_analizados}")
+    print(f"Puertos abiertos: {puertos_abiertos}")
+
+    if lista_abiertos:
+        print("Detalle de abiertos: " + ", ".join(map(str, lista_abiertos)))
+    else:
+        print("No se encontraron puertos abiertos en el rango seleccionado.")
+
+    print("=" * 40)
+
+if __name__ == "__main__":
+    escanear_puertos()
