@@ -1,0 +1,17 @@
+# Escáner de Puertos TCP en Python
+
+Este repositorio contiene una herramienta desarrollada en Python utilizando la librería nativa `socket` para el análisis y detección de puertos TCP abiertos en hosts locales y redes autorizadas. Proyecto desarrollado como parte de la asignatura de **Seguridad Informática (UNEMI)**.
+
+## 📌 Funcionalidades
+- Solicitud de IP objetivo y rango de puertos.
+- Análisis de estado de puertos TCP.
+- Resumen consolidado del total de puertos analizados y abiertos.
+- Control de excepciones e interrupciones por teclado.
+
+## 📁 Archivos del Repositorio
+- `scanner_puertos.py`: Código fuente del escáner en Python.
+- `MANUAL_USO.md`: Guía de ejecución e interpretación de resultados.
+- `README.md`: Descripción general del proyecto.
+
+## ⚠️ Uso Ético y Responsable
+Esta herramienta debe ejecutarse exclusivamente sobre entornos propios (`127.0.0.1` / localhost), máquinas virtuales o redes con autorización previa.
